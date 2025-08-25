@@ -14,7 +14,7 @@ Configuração completa de um servidor Ubuntu para executar modelos de linguagem
 
 ## 🛠️ Stack Tecnológica
 
-- **Sistema Operacional**: Ubuntu Server 22.04+ / 24.04+
+- **Sistema Operacional**: Ubuntu Server 22.04+ / 25.04+
 - **Orquestração**: K3s (Kubernetes leve)
 - **LLM Engine**: Ollama & llama.cpp
 - **Interface**: Chatbot UI
@@ -34,20 +34,15 @@ Configuração completa de um servidor Ubuntu para executar modelos de linguagem
 Consulte a documentação em [docs/hardware-requirements.md](docs/hardware-requirements.md) para instruções detalhadas de instalação.
 
 ## 📂 Estrutura do Projeto
-ia-server-setup/
+    ia-server-setup/
 
-├── scripts/ # Scripts de automação
+        ├── scripts/ # Scripts de automação
 
-├── kubernetes/ # Manifestos K3s
+        ├── kubernetes/ # Manifestos K3s
 
-├── docs/ # Documentação
+        ├── docs/ # Documentação
 
-└── README.md # Este arquivo
-
-
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+        └── README.md # Este arquivo
 
 ## 📜 License
 
