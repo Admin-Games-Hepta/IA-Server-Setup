@@ -34,9 +34,13 @@ Consulte a documentação em [docs/hardware-requirements.md](docs/hardware-requi
 
 ## 📂 Estrutura do Projeto
 ia-server-setup/
+
 ├── scripts/ # Scripts de automação
+
 ├── kubernetes/ # Manifestos K3s
+
 ├── docs/ # Documentação
+
 └── README.md # Este arquivo
 
 
