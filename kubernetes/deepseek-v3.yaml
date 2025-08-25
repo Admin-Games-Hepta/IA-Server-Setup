@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deepseek-v3-deployment
+  namespace: ia-llm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-server  # Mesmo label
+      model: deepseek-v3
+  template:
+    metadata:
+      labels:
+        app: llm-server  # Mesmo label
+        model: deepseek-v3
+    spec:
+      containers:
+      - name: deepseek-v3
+        image: ghcr.io/ggml-org/llama.cpp:server-cuda
+        args:
+        - --model
+        - /models/deepseek-v3.Q5_K_M.gguf
+        - --port
+        - "8000"  # SEMPRE porta 8000
+        - --host
+        - "0.0.0.0"
+        - --n-gpu-layers
+        - "35"
+        - --n-predict
+        - "4096"
+        - --ctx-size
+        - "131072"
+        ports:
+        - containerPort: 8000  # SEMPRE porta 8000
+          name: http
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+            memory: "12Gi"
+          requests:
+            nvidia.com/gpu: 1
+            memory: "10Gi"
+        volumeMounts:
+        - name: models-volume
+          mountPath: /models
+      volumes:
+      - name: models-volume
+        persistentVolumeClaim:
+          claimName: llm-models-pvc
