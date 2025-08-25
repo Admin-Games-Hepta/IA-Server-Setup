@@ -1,4 +1,5 @@
 # 🧠 Ubuntu AI Server Setup
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Configuração completa de um servidor Ubuntu para executar modelos de linguagem (LLMs) como **DeepSeek-V3**, **Mistral**, e **CodeLlama**, com suporte a **GPU NVIDIA** e **CPU-only**, utilizando **K3s (Kubernetes)** e **Chatbot UI**.
 
@@ -48,3 +49,6 @@ ia-server-setup/
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
 
+## 📜 License
+
+Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
