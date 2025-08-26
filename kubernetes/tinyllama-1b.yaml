@@ -27,27 +27,39 @@ spec:
         - "0.0.0.0"
         - --n-gpu-layers
         - "0"
-        - --n-predict
-        - "128"
         - --ctx-size
-        - "1024"
+        - "512"  # Reduzido drasticamente
         - --threads
-        - "2"
+        - "1"    # Apenas 1 thread inicialmente
         - --batch-size
-        - "256"
+        - "128"  # Batch menor
+        - --n-predict
+        - "32"   # Apenas 32 tokens para teste
         ports:
         - containerPort: 8000
           name: http
         resources:
           limits:
             memory: "2Gi"
-            cpu: "2"
+            cpu: "1"
           requests:
             memory: "1Gi"
-            cpu: "1"
+            cpu: "500m"
         volumeMounts:
         - name: models-volume
           mountPath: /models
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
       volumes:
       - name: models-volume
         persistentVolumeClaim:
