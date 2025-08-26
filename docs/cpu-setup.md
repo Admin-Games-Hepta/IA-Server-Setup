@@ -15,8 +15,6 @@
 
 -------------------------------
 
-## ⚙️ Modo Basico
-
 Este guia explica como instalar e configurar LLMs para execução **apenas com CPU** no Ubuntu Server 25.04 usando os scripts deste repositório.
 
 ## 📋 Pré-requisitos
@@ -29,6 +27,14 @@ Este guia explica como instalar e configurar LLMs para execução **apenas com C
 ## 🚀 Instalação Passo a Passo
 
 ### 1. 🖥️ Preparar o Sistema Base
+
+## ⚙️ Modo Basico
+
+### Requisitos:
+- **CPU:** 8 núcleos
+- **RAM:** 32GB
+- **Armazenamento:** 150GB
+
 ```bash
 # Clonar repositório no /opt
 cd /opt
@@ -47,7 +53,7 @@ cd IA-Server-Setup
 
 # Deploy da stack
 ./scripts/05-deploy-llm-stack.sh
-
+```
 
 ## 🐢 Modo Minimal (Hardware Limitado)
 
@@ -56,13 +62,12 @@ cd IA-Server-Setup
 - **RAM:** 4GB
 - **Armazenamento:** 10GB
 
+```bash
 cd /opt
 sudo git clone https://github.com/Admin-Games-Hepta/IA-Server-Setup.git
 sudo chown -R $USER:$USER IA-Server-Setup
 cd IA-Server-Setup
 
-### Instalação Minimal:
-```bash
 # Instalar K3s minimal
 ./scripts/03-install-k3s.sh minimal
 
@@ -74,3 +79,4 @@ cd IA-Server-Setup
 
 # Usar apenas TinyLlama
 ./scripts/switch-model.sh tinyllama minimal
+```
