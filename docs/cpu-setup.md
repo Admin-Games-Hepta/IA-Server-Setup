@@ -41,6 +41,7 @@ cd /opt
 sudo git clone https://github.com/Admin-Games-Hepta/IA-Server-Setup.git
 sudo chown -R $USER:$USER IA-Server-Setup
 cd IA-Server-Setup
+chmod +x scripts/*.sh
 
 # Instalar dependências
 ./scripts/01-install-basics.sh
@@ -67,6 +68,7 @@ cd /opt
 sudo git clone https://github.com/Admin-Games-Hepta/IA-Server-Setup.git
 sudo chown -R $USER:$USER IA-Server-Setup
 cd IA-Server-Setup
+chmod +x scripts/*.sh
 
 # Instalar K3s minimal
 ./scripts/03-install-k3s.sh minimal

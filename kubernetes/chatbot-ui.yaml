@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatbot-ui-deployment
+  namespace: ia-llm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatbot-ui
+  template:
+    metadata:
+      labels:
+        app: chatbot-ui
+    spec:
+      containers:
+      - name: chatbot-ui
+        image: ghcr.io/mckaywrigley/chatbot-ui:main
+        ports:
+        - containerPort: 3000
+          name: http
+        env:
+        - name: DEFAULT_MODEL
+          value: "codellama-7b"
+        - name: OLLAMA_URL
+          value: "http://llm-service:8000"
+        - name: OPENAI_API_KEY
+          value: "sk-dummy-key"  # Placeholder para configuração
+        - name: DEFAULT_SYSTEM_PROMPT
+          value: "You are a helpful AI assistant."
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chatbot-ui-service
+  namespace: ia-llm
+spec:
+  selector:
+    app: chatbot-ui
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: NodePort
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: chatbot-ui-ingress
+  namespace: ia-llm
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: chatbot-ui-service
+            port:
+              number: 3000
