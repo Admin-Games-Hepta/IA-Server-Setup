@@ -1,6 +1,6 @@
 #!/bin/bash
 # Script: 01-install-basics.sh
-# Descrição: Instala dependências básicas do sistema
+# Descrição: Prepara sistema com diretórios no /opt
 
 set -e
 
@@ -18,5 +18,10 @@ sudo apt install -y \
     ca-certificates \
     gnupg \
     lsb-release
+
+echo "📁 Criando estrutura de diretórios no /opt..."
+sudo mkdir -p /opt/k3s-data /opt/k3s-storage /opt/models /opt/IA-Server-Setup
+sudo chown -R $USER:$USER /opt/k3s-storage /opt/models /opt/IA-Server-Setup
+sudo chmod 755 /opt/k3s-data /opt/k3s-storage /opt/models
 
 echo "✅ Dependências básicas instaladas!"

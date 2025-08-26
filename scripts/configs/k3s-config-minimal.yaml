@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k3s-minimal-config
+  namespace: kube-system
+data:
+  config.toml: |
+    [plugins."io.containerd.grpc.v1.cri"]
+      [plugins."io.containerd.grpc.v1.cri".containerd]
+        default_runtime_name = "runc"
+        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+            runtime_type = "io.containerd.runc.v2"
+    [agent]
+    disable-cloud-controller = true
+    disable-network-policy = true
+    disable-traefik = true
+    disable-servicelb = true
+    node-ip = "127.0.0.1"
