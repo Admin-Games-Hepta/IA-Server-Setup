@@ -9,7 +9,7 @@ MODE=${2:-"normal"}  # Padrão: modo normal
 
 if [ -z "$MODEL" ]; then
     echo "⚠️  Uso: ./switch-model.sh [modelo] [modo]"
-    echo "💡 Modelos: tinyllama, codellama, mistral, deepseek"
+    echo "💡 Modelos: phi-2, codellama, mistral, deepseek"
     echo "💡 Modos: normal, minimal"
     exit 1
 fi
@@ -21,17 +21,17 @@ echo "⏹️  Parando todos os modelos..."
 kubectl scale deployment -n ia-llm --replicas=0 --all
 sleep 5
 
-# Modo minimal só oferece TinyLlama
-if [ "$MODE" = "minimal" ] && [ "$MODEL" != "tinyllama" ]; then
-    echo "❌ Modo minimal suporta apenas: tinyllama"
+# Modo minimal só oferece Phi-2
+if [ "$MODE" = "minimal" ] && [ "$MODEL" != "phi-2" ]; then
+    echo "❌ Modo minimal suporta apenas: phi-2"
     exit 1
 fi
 
 # Iniciar modelo selecionado
 case $MODEL in
-    "tinyllama")
-        echo "🚀 Iniciando TinyLlama-1B..."
-        kubectl scale deployment -n ia-llm --replicas=1 tinyllama-1b-deployment
+    "phi-2")
+        echo "🚀 Iniciando Phi-2-1B..."
+        kubectl scale deployment -n ia-llm --replicas=1 phi-2-deployment
         ;;
     "codellama")
         if [ "$MODE" = "minimal" ]; then
@@ -59,7 +59,7 @@ case $MODEL in
         ;;
     *)
         echo "❌ Modelo inválido: $MODEL"
-        echo "💡 Opções: tinyllama, codellama, mistral, deepseek"
+        echo "💡 Opções: phi-2, codellama, mistral, deepseek"
         exit 1
         ;;
 esac
