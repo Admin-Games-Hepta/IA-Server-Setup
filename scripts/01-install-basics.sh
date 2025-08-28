@@ -21,7 +21,8 @@ sudo apt install -y \
 
 echo "📁 Criando estrutura de diretórios no /opt..."
 sudo mkdir -p /opt/k3s-data /opt/k3s-storage /opt/models /opt/IA-Server-Setup
-sudo chown -R $USER:$USER /opt/k3s-storage /opt/models /opt/IA-Server-Setup
+# Apenas os diretórios de modelos e do projeto precisam da permissão do usuário
+sudo chown -R $USER:$USER /opt/models /opt/IA-Server-Setup
 sudo chmod 755 /opt/k3s-data /opt/k3s-storage /opt/models
 
 echo "✅ Dependências básicas instaladas!"

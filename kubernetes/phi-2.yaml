@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: phi-2
-        image: ghcr.io/ggml-org/llama.cpp:light
+        image: ghcr.io/ggml-org/llama.cpp:server
         args:
         - --model
         - /models/phi-2.Q4_K_M.gguf
