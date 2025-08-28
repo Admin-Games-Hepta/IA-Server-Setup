@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama-deployment
+  namespace: ia-llm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-server
+      model: ollama
+  template:
+    metadata:
+      labels:
+        app: llm-server
+        model: ollama
+    spec:
+      containers:
+      - name: ollama
+        image: ollama/ollama:latest
+        ports:
+        - containerPort: 11434
+          name: http
+        resources:
+          limits:
+            memory: "4Gi"
+            cpu: "2"
+          requests:
+            memory: "2Gi"
+            cpu: "1"
+        volumeMounts:
+        - name: ollama-models-volume
+          mountPath: /root/.ollama
+      volumes:
+      - name: ollama-models-volume
+        persistentVolumeClaim:
+          claimName: llm-models-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: llm-service
+  namespace: ia-llm
+spec:
+  type: NodePort
+  selector:
+    app: llm-server
+  ports:
+    - port: 8000
+      targetPort: 11434  # ✅ A API do Ollama roda na porta 11434
+      nodePort: 30080

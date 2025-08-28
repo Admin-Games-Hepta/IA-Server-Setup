@@ -1,33 +1,28 @@
+# kubernetes/ollama-webui.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chatbot-ui-deployment
+  name: ollama-webui-deployment
   namespace: ia-llm
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: chatbot-ui
+      app: ollama-webui
   template:
     metadata:
       labels:
-        app: chatbot-ui
+        app: ollama-webui
     spec:
       containers:
-      - name: chatbot-ui
-        image: ghcr.io/mckaywrigley/chatbot-ui:main
+      - name: ollama-webui
+        image: ghcr.io/ollama-webui/ollama-webui:main
         ports:
-        - containerPort: 3000
+        - containerPort: 8080
           name: http
         env:
-        - name: DEFAULT_MODEL
-          value: "codellama-7b"
-        - name: OLLAMA_URL
+        - name: OLLAMA_API_BASE_URL
           value: "http://llm-service:8000"
-        - name: OPENAI_API_KEY
-          value: "sk-dummy-key"
-        - name: DEFAULT_SYSTEM_PROMPT
-          value: "You are a helpful AI assistant."
         resources:
           limits:
             memory: "1Gi"
@@ -39,14 +34,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: chatbot-ui-service
+  name: ollama-webui-service
   namespace: ia-llm
 spec:
   selector:
-    app: chatbot-ui
+    app: ollama-webui
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 3000
-      nodePort: 30000
+      port: 80
+      targetPort: 8080
+      nodePort: 30080 # ✅ Acesso externo via esta porta
   type: NodePort

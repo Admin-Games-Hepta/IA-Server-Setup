@@ -9,13 +9,15 @@ MODELS_DIR="/opt/models"
 
 echo "📥 Baixando modelos para modo: $MODE"
 
-sudo mkdir -p $MODELS_DIR
-sudo chown $USER:$USER $MODELS_DIR
-sudo chmod 755 $MODELS_DIR
+# As permissões já foram configuradas no 01-install-basics.sh (recomendado)
+# Se estiver rodando este script isoladamente, use as linhas abaixo:
+# sudo mkdir -p $MODELS_DIR
+# sudo chown $USER:$USER $MODELS_DIR
+# sudo chmod 755 $MODELS_DIR
 
 if [ "$MODE" = "minimal" ]; then
     echo "⬇️  Baixando phi-2 (modo minimal)..."
-    wget -c -O $MODELS_DIR/phi-2.Q4_K_M.Q4_K_M.gguf \
+    wget -c -O $MODELS_DIR/phi-2.Q4_K_M.gguf \
         https://huggingface.co/TheBloke/phi-2-GGUF/resolve/main/phi-2.Q4_K_M.gguf
 else
     echo "⬇️  Baixando CodeLlama-7B..."
@@ -24,12 +26,11 @@ else
 
     echo "⬇️  Baixando Mistral-7B..."
     wget -c -O $MODELS_DIR/mistral-7b.Q4_K_M.gguf \
-        https://huggingface.co/TheBloke/Mistral-7B-v0.1-GGUF/resolve/main/mistral-7b-v0.1.Q4_K_M.gguf
+        https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.2-GGUF/resolve/main/mistral-7b-instruct-v0.2.Q4_K_M.gguf
 
-    echo "⬇️  Baixando phi-2 (modo minimal)..."
-    wget -c -O $MODELS_DIR/phi-2.Q4_K_M.Q4_K_M.gguf \
-        https://huggingface.co/TheBloke/phi-2-GGUF/resolve/main/phi-2.Q4_K_M.gguf
+    echo "⬇️  Baixando DeepSeek-V3..."
+    wget -c -O $MODELS_DIR/deepseek-v3.Q5_K_M.gguf \
+        https://huggingface.co/TheBloke/deepseek-v3-GGUF/resolve/main/deepseek-v3.Q5_K_M.gguf
 fi
 
-echo "✅ Download concluído!"
-ls -lh $MODELS_DIR
+echo "✅ Download de modelos concluído!"
