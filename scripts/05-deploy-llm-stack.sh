@@ -27,9 +27,9 @@ kubectl apply -f kubernetes/service.yaml
 # Deploy dos modelos conforme o modo
 if [ "$MODE" = "minimal" ]; then
     echo "🐢 Modo MINIMAL selecionado"
-    echo "🤖 Configurando TinyLlama-1B..."
-    kubectl apply -f kubernetes/tinyllama-1b.yaml
-    kubectl scale deployment -n ia-llm --replicas=0 tinyllama-1b-deployment
+    echo "🤖 Configurando phi-2..."
+    kubectl apply -f kubernetes/phi-2.yaml
+    kubectl scale deployment -n ia-llm --replicas=0 phi-2-deployment
 else
     echo "⚡ Modo NORMAL selecionado"
     echo "🤖 Configurando CodeLlama-7B..."
@@ -44,9 +44,9 @@ else
     kubectl apply -f kubernetes/mistral.yaml
     kubectl scale deployment -n ia-llm --replicas=0 mistral-7b-deployment
 
-    echo "🤖 Configurando TinyLlama-1B..."
-    kubectl apply -f kubernetes/tinyllama-1b.yaml
-    kubectl scale deployment -n ia-llm --replicas=0 tinyllama-1b-deployment
+    echo "🤖 Configurando phi-2..."
+    kubectl apply -f kubernetes/phi-2.yaml
+    kubectl scale deployment -n ia-llm --replicas=0 phi-2-deployment
 fi
 
 # Deploy do Chatbot UI
@@ -57,11 +57,11 @@ echo "✅ Deploy completo realizado!"
 echo "💡 Use './switch-model.sh [modelo] [modo]' para alternar entre modelos"
 
 if [ "$MODE" = "minimal" ]; then
-    echo "🐢 Modo MINIMAL: Apenas TinyLlama-1B disponível"
-    echo "🚀 Para ativar: ./switch-model.sh tinyllama minimal"
+    echo "🐢 Modo MINIMAL: Apenas phi-2 disponível"
+    echo "🚀 Para ativar: ./switch-model.sh phi-2 minimal"
 else
     echo "⚡ Modo NORMAL: Todos os modelos disponíveis"
-    echo "🚀 Para ativar: ./switch-model.sh [tinyllama|codellama|mistral|deepseek]"
+    echo "🚀 Para ativar: ./switch-model.sh [phi-2|codellama|mistral|deepseek]"
 fi
 
 echo "📊 Verificando status..."

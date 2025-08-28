@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tinyllama-1b-deployment
+  name: phi-2-deployment
   namespace: ia-llm
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: llm-server
-      model: tinyllama-1b
+      model: phi-2
   template:
     metadata:
       labels:
         app: llm-server
-        model: tinyllama-1b
+        model: phi-2
     spec:
       containers:
-      - name: tinyllama-1b
-        image: ghcr.io/ggml-org/llama.cpp:server
+      - name: phi-2
+        image: ghcr.io/ggml-org/llama.cpp:light
         args:
         - --model
-        - /models/tinyllama-1b.Q4_K_M.gguf
+        - /models/phi-2.Q4_K_M.gguf
         - --port
         - "8000"
         - --host
@@ -28,38 +28,26 @@ spec:
         - --n-gpu-layers
         - "0"
         - --ctx-size
-        - "512"  # Reduzido drasticamente
+        - "2048"  # Reduzido drasticamente
         - --threads
-        - "1"    # Apenas 1 thread inicialmente
+        - "4"    # Apenas 1 thread inicialmente
         - --batch-size
-        - "128"  # Batch menor
+        - "512"  # Batch menor
         - --n-predict
-        - "32"   # Apenas 32 tokens para teste
+        - "256"   # Apenas 32 tokens para teste
         ports:
         - containerPort: 8000
           name: http
         resources:
           limits:
+            memory: "4Gi"
+            cpu: "2"
+          requests:
             memory: "2Gi"
             cpu: "1"
-          requests:
-            memory: "1Gi"
-            cpu: "500m"
         volumeMounts:
         - name: models-volume
           mountPath: /models
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8000
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8000
-          initialDelaySeconds: 5
-          periodSeconds: 5
       volumes:
       - name: models-volume
         persistentVolumeClaim:

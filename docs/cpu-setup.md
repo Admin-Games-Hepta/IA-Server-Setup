@@ -73,12 +73,12 @@ chmod +x scripts/*.sh
 # Instalar K3s minimal
 ./scripts/03-install-k3s.sh minimal
 
-# Baixar apenas TinyLlama
+# Baixar apenas phi-2
 ./scripts/04-download-models.sh minimal
 
 # Deploy minimal
 ./scripts/05-deploy-llm-stack.sh minimal
 
-# Usar apenas TinyLlama
-./scripts/switch-model.sh tinyllama minimal
+# Usar apenas phi-2
+./scripts/switch-model.sh phi-2 minimal
 ```
