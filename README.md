@@ -53,13 +53,13 @@ echo "Open WebUI: http://IP-do-seu-servidor:30081"
 ## Estrutura do Projeto
 ```text
 IA-Server-Setup/
-├── kubernetes/          # Manifestos Kubernetes
+├── kubernetes/         # Manifestos Kubernetes
 │   ├── cpu-minimal/    # Configuração mínima CPU
 │   ├── cpu-recommended/# Configuração recomendada CPU  
 │   ├── gpu-recommended/# Configuração com GPU
 │   └── scripts/        # Scripts de automação
 ├── docs/               # Documentação
-└── README.md          # Este arquivo
+└── README.md           # Este arquivo
 ```
 
 ## Recursos de API
@@ -77,7 +77,7 @@ curl http://localhost:30080/api/generate -d '{
   "prompt": "Por que o céu é azul?",
   "stream": false
 }'
-
+```
 
 ### Open WebUI API (Porta 30081)
 **Acesso via interface web em http://localhost:30081**
