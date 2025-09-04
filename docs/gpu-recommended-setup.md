@@ -13,7 +13,7 @@
 1. **Instalar NVIDIA Drivers:**
 ```bash
    # Ubuntu/Debian
-   sudo apt-get install nvidia-driver-535
+   sudo apt-get install nvidia-driver
 
    # CentOS/RHEL
    sudo dnf install nvidia-driver
@@ -37,7 +37,7 @@ kubectl create -f https://raw.githubusercontent.com/NVIDIA/k8s-device-plugin/v0.
 4. **Verificar disponibilidade de GPUs:**
 ```bash
 kubectl get nodes -o json | jq '.items[].status.capacity'
-```bash
+```
 
 ## 🚀 Passo a Passo da Instalação
 
@@ -70,14 +70,14 @@ kubectl describe pod -l app=ollama -n ia-llm | grep -i gpu
    ***Open WebUI: http://IP-do-seu-servidor:30081***
 
 ## Modelos Recomendados para GPU 8GB VRAM:
- 🔸 **llama3.2:3b** - 2.5GB (excelente performance)
- 🔸 **llama3:8b** - 4.7GB (bom equilíbrio)
- 🔸 **mistral:7b** - 4.1GB (ótimas capacidades)
+- 🔸 **llama3.2:3b** - 2.5GB (excelente performance)
+- 🔸 **llama3:8b** - 4.7GB (bom equilíbrio)
+- 🔸 **mistral:7b** - 4.1GB (ótimas capacidades)
 
 ## Modelos Recomendados para GPU 12GB+ VRAM:
- 🔸 **llama3:70b** - 39GB (requer quantização)
- 🔸 **mixtral:8x7b** - 23GB (MoE eficiente)
- 🔸 **qwen:14b** - 7.8GB (multilingual)
+- 🔸 **llama3:70b** - 39GB (requer quantização)
+- 🔸 **mixtral:8x7b** - 23GB (MoE eficiente)
+- 🔸 **qwen:14b** - 7.8GB (multilingual)
 
 ## Otimizações para GPU
 **Ajustes de performance:**

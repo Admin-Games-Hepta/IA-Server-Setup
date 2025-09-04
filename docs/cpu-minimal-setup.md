@@ -43,15 +43,15 @@
    ***Open WebUI: http://IP-do-seu-servidor:30081***
    
 ## Configuração Inicial do Open WebUI
-**1.** Acesse http://seu-servidor:30081
-**2.** Crie uma conta de administrador
-**3.** Configure a conexão com Ollama em Settings → Connection
-**4.** Adicione modelos através da interface ou via API
+- **1.** Acesse http://IP-seu-servidor:30081
+- **2.** Crie uma conta de administrador
+- **3.** Configure a conexão com Ollama em Settings → Connection
+- **4.** Adicione modelos através da interface ou via API
 
 ## Modelos Recomendados para CPU Minimal
- 🔸 **llama3.2:1b** - 1.1GB (ideal para CPUs modestas)
- 🔸 **phi3:mini** - 1.8GB (bom equilíbrio qualidade/desempenho)
- 🔸 **gemma:2b** - 2.5GB (multilingual)
+- 🔸 **llama3.2:1b** - 1.1GB (ideal para CPUs modestas)
+- 🔸 **phi3:mini** - 1.8GB (bom equilíbrio qualidade/desempenho)
+- 🔸 **gemma:2b** - 2.5GB (multilingual)
  
 **Comandos Úteis**
 *Ver logs dos containers:*

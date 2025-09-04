@@ -43,17 +43,17 @@ kubectl wait --for=condition=ready pod -l app=open-webui -n ia-llm --timeout=180
    ***Open WebUI: http://IP-do-seu-servidor:30081***
 
 ## Configuração Inicial do Open WebUI
-**1.** Acesse http://seu-servidor:30081
-**2.** Crie uma conta de administrador
-**3.** Configure a conexão com Ollama em Settings → Connection
-**4.** Adicione modelos através da interface ou via API
+- **1.** Acesse http://IP-seu-servidor:30081
+- **2.** Crie uma conta de administrador
+- **3.** Configure a conexão com Ollama em Settings → Connection
+- **4.** Adicione modelos através da interface ou via API
 
 ## Modelos Recomendados para CPU Recommended
- 🔸 **llama3.2:3b** - 2.5GB (bom desempenho em CPU)
- 🔸 **llama3.2:1b** - 1.1GB (rápido para tarefas simples)
- 🔸 **phi3:mini** - 1.8GB (excelente qualidade)
- 🔸 **gemma:2b** - 2.5GB (multilingual)
- 🔸 **mistral:7b** - 4.1GB (requer boa CPU)
+- 🔸 **llama3.2:3b** - 2.5GB (bom desempenho em CPU)
+- 🔸 **llama3.2:1b** - 1.1GB (rápido para tarefas simples)
+- 🔸 **phi3:mini** - 1.8GB (excelente qualidade)
+- 🔸 **gemma:2b** - 2.5GB (multilingual)
+- 🔸 **mistral:7b** - 4.1GB (requer boa CPU)
 
 ## Otimizações para CPU
 **Ajuste de variáveis de ambiente para melhor performance:**
@@ -79,9 +79,9 @@ kubectl logs deployment/ollama-deployment -n ia-llm | grep -i "eval"
 ## Escalabilidade
 **Para ambientes com múltiplos usuários:**
 
-Aumente o OLLAMA_NUM_PARALLEL para 4-8
-Considere aumentar os limites de memória para 32GB
-Adicione mais réplicas do Ollama se necessário
+- Aumente o OLLAMA_NUM_PARALLEL para 4-8
+- Considere aumentar os limites de memória para 32GB
+- Adicione mais réplicas do Ollama se necessário
 
 ## Troubleshooting
  📖 **Consulte a documentação de [troubleshooting](./docs/troubleshooting.md) para problemas comuns.*

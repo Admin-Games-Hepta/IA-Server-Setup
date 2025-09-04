@@ -45,10 +45,10 @@ echo "Open WebUI: http://IP-do-seu-servidor:30081"
 ```
 
 ## Documentação Detalhada
-📖 **[CPU Minimal Setup](./docs/cpu-minimal-setup.md)**
-📖 **[CPU Recommended Setup](./docs/cpu-recommended-setup.md)**
-📖 **[GPU Recommended Setup](./docs/gpu-recommended-setup.md)**
-📖 **[Troubleshooting](./docs/troubleshooting.md)**
+- 📖 **[CPU Minimal Setup](./docs/cpu-minimal-setup.md)**
+- 📖 **[CPU Recommended Setup](./docs/cpu-recommended-setup.md)**
+- 📖 **[GPU Recommended Setup](./docs/gpu-recommended-setup.md)**
+- 📖 **[Troubleshooting](./docs/troubleshooting.md)**
 
 ## Estrutura do Projeto
 ```text
@@ -80,10 +80,10 @@ curl http://localhost:30080/api/generate -d '{
 ```
 
 ### Open WebUI API (Porta 30081)
-**Acesso via interface web em http://localhost:30081**
+**Acesso via interface web em http://IP-do-seu-servidor:30081**
 
 ## Licença
-***Este projeto está sob a licença MIT. Veja o arquivo LICENSE para detalhes.***
+***Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para detalhes.***
 
 ## Suporte
 *Para issues e dúvidas, abra uma issue no GitHub ou consulte a documentação de [Troubleshooting](./docs/troubleshooting.md).*
