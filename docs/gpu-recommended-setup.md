@@ -43,6 +43,7 @@ kubectl get nodes -o json | jq '.items[].status.capacity'
 
 1. **Clone o repositório:**
 ```bash
+   cd /opt
    git clone https://github.com/Admin-Games-Hepta/IA-Server-Setup.git
    cd IA-Server-Setup
 ```
