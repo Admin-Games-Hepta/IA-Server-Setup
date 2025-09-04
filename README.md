@@ -1,58 +1,89 @@
-# 🧠 Ubuntu AI Server Setup
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# 🧠 IA Server Setup
 
-Configuração completa de um servidor Ubuntu para executar modelos de linguagem (LLMs) como **DeepSeek-V3**, **Mistral**, **CodeLlama** e **TinyLlama**, com suporte a **GPU NVIDIA**, **CPU-only** e **modo minimal**, utilizando **K3s (Kubernetes)** e **Chatbot UI**.
+Este projeto fornece uma stack completa de IA para execução de modelos de linguagem (LLMs) em Kubernetes, com três perfis de implantação:
 
-## 🚀 Guias de Instalação
+## Perfis de Implantação
 
-### 🔧 Para Instalação em CPU: 
-📖 **Consulte nossa documentação completa:** [Instalação CPU Guide](./docs/cpu-setup.md)
+### 1. CPU Minimal
+- **Requisitos:** 4GB RAM, 20GB storage, 2 cores CPU
+- **Ideal:** Testes, desenvolvimento, modelos pequenos
+- **Modelos:** llama3.2:1b, phi3:mini, gemma:2b
 
-### 🎮 Para Instalação com GPU NVIDIA:
-📖 **Documentação GPU:** [Instalação GPU Guide](./docs/gpu-setup.md) 
+### 2. CPU Recommended  
+- **Requisitos:** 16GB RAM, 40GB storage, 8+ cores CPU
+- **Ideal:** Produção small-scale, múltiplos usuários
+- **Modelos:** llama3.2:3b, mistral:7b, modelos médios
 
-### 🐢 Para Hardware Limitado (Modo Minimal):
-📖 **Guia Minimal:** [Modo Minimal Guide](./docs/cpu-setup.md#-modo-minimal-hardware-limitado)
+### 3. GPU Recommended
+- **Requisitos:** 32GB RAM, 70GB storage, GPU NVIDIA 8GB+
+- **Ideal:** Produção high-performance, modelos grandes
+- **Modelos:** llama3:8b, mixtral:8x7b, qwen:14b
 
-## ✨ Funcionalidades
+## Componentes Incluídos
 
-- ✅ Suporte a múltiplos LLMs (DeepSeek-V3, Mistral, CodeLlama, TinyLlama)
-- ✅ Deployment automatizado em Kubernetes (K3s)
-- ✅ Suporte a GPU NVIDIA (CUDA) e CPU-only
-- ✅ Interface web moderna (Chatbot UI)
-- ✅ Scripts modulares e parametrizados
-- ✅ Documentação detalhada para diferentes hardwares
+- **Ollama:** Servidor de modelos LLM
+- **Open WebUI:** Interface web para chat com modelos
+- **PostgreSQL:** Banco de dados para a WebUI
+- **Persistent Storage:** Armazenamento para modelos e dados
 
-## 🛠️ Stack Tecnológica
+## Quick Start
 
-- **Sistema Operacional**: Ubuntu Server 22.04+ / 24.04+ / 25.04
-- **Orquestração**: K3s (Kubernetes leve)
-- **LLM Engine**: Ollama & llama.cpp
-- **Interface**: Chatbot UI
-- **Hardware**: Suporte a GPU NVIDIA, CPU-only e modo minimal
+```bash
+# Clone o repositório
+git clone https://github.com/Admin-Games-Hepta/IA-Server-Setup.git
+cd IA-Server-Setup
 
-## 📋 Requisitos de Hardware
+# Prepare diretórios de dados
+sudo mkdir -p /opt/llm-models /opt/postgres-data
+sudo chmod 777 /opt/llm-models /opt/postgres-data
 
-| Configuração | Minimal (CPU) | CPU Only | GPU NVIDIA |
-|--------------|---------------|----------|------------|
-| **GPU**      | -             | -        | ≥ 8GB VRAM |
-| **RAM**      | 4GB           | 16GB     | 32GB+      |
-| **CPU**      | 2 núcleos     | 8 núcleos| 12+ núcleos|
-| **Armazenamento** | 10GB SSD  | 100GB SSD | 500GB+ NVMe |
+# Escolha o perfil (ex: CPU Minimal)
+./kubernetes/scripts/apply-cpu-minimal.sh
 
-Consulte a documentação em [docs/hardware-requirements.md](docs/hardware-requirements.md) para instruções detalhadas de instalação.
+# Acesse a interface
+echo "Open WebUI: http://IP-do-seu-servidor:30081"
+```
 
-## 📂 Estrutura do Projeto
-    ia-server-setup/
+## Documentação Detalhada
+📖 **[CPU Minimal Setup](./docs/cpu-minimal-setup.md)**
+📖 **[CPU Recommended Setup](./docs/cpu-recommended-setup.md)**
+📖 **[GPU Recommended Setup](./docs/gpu-recommended-setup.md)**
+📖 **[Troubleshooting](./docs/troubleshooting.md)**
 
-        ├── scripts/ # Scripts de automação
+## Estrutura do Projeto
+```text
+IA-Server-Setup/
+├── kubernetes/          # Manifestos Kubernetes
+│   ├── cpu-minimal/    # Configuração mínima CPU
+│   ├── cpu-recommended/# Configuração recomendada CPU  
+│   ├── gpu-recommended/# Configuração com GPU
+│   └── scripts/        # Scripts de automação
+├── docs/               # Documentação
+└── README.md          # Este arquivo
+```
 
-        ├── kubernetes/ # Manifestos K3s
+## Recursos de API
+### Ollama API (Porta 30080)
+```bash
+# Listar modelos
+curl http://localhost:30080/api/tags
 
-        ├── docs/ # Documentação
+# Baixar modelo
+curl -X POST http://localhost:30080/api/pull -d '{"name": "llama3.2:1b"}'
 
-        └── README.md # Este arquivo
+# Gerar resposta
+curl http://localhost:30080/api/generate -d '{
+  "model": "llama3.2:1b",
+  "prompt": "Por que o céu é azul?",
+  "stream": false
+}'
 
-## 📜 License
 
-Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para detalhes.
+### Open WebUI API (Porta 30081)
+**Acesso via interface web em http://localhost:30081**
+
+## Licença
+***Este projeto está sob a licença MIT. Veja o arquivo LICENSE para detalhes.***
+
+## Suporte
+*Para issues e dúvidas, abra uma issue no GitHub ou consulte a documentação de [Troubleshooting](./docs/troubleshooting.md).*

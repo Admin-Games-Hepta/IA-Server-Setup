@@ -1,0 +1,8 @@
+# IA Server Setup - Dependencies
+# Este arquivo lista dependências Python para scripts auxiliares
+
+kubernetes>=28.1.0
+requests>=2.31.0
+docker>=6.1.3
+pyyaml>=6.0.1
+tqdm>=4.66.2
